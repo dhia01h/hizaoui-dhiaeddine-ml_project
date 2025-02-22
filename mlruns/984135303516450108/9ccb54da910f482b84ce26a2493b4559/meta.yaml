@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/984135303516450108/9ccb54da910f482b84ce26a2493b4559/artifacts
+end_time: 1739357785732
+entry_point_name: ''
+experiment_id: '984135303516450108'
+lifecycle_stage: active
+run_id: 9ccb54da910f482b84ce26a2493b4559
+run_name: bedecked-horse-287
+run_uuid: 9ccb54da910f482b84ce26a2493b4559
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1739357781025
+status: 3
+tags: []
+user_id: dhia

@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/984135303516450108/0a15c1ba2b39410b92f7017be3a978f8/artifacts
+end_time: 1739738558879
+entry_point_name: ''
+experiment_id: '984135303516450108'
+lifecycle_stage: active
+run_id: 0a15c1ba2b39410b92f7017be3a978f8
+run_name: persistent-grub-50
+run_uuid: 0a15c1ba2b39410b92f7017be3a978f8
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1739738558100
+status: 3
+tags: []
+user_id: dhia

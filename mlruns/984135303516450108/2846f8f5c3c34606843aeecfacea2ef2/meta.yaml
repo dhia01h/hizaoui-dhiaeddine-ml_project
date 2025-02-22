@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/984135303516450108/2846f8f5c3c34606843aeecfacea2ef2/artifacts
+end_time: 1739737813460
+entry_point_name: ''
+experiment_id: '984135303516450108'
+lifecycle_stage: active
+run_id: 2846f8f5c3c34606843aeecfacea2ef2
+run_name: gentle-tern-641
+run_uuid: 2846f8f5c3c34606843aeecfacea2ef2
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1739737808483
+status: 3
+tags: []
+user_id: dhia

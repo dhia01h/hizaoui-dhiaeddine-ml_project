@@ -1,0 +1,16 @@
+aliases: []
+creation_timestamp: 1739357785723
+current_stage: Archived
+description: 'dhiq misewi
+
+  '
+last_updated_timestamp: 1739828565320
+name: ChurnPredictionModel
+run_id: 9ccb54da910f482b84ce26a2493b4559
+run_link: ''
+source: mlflow-artifacts:/984135303516450108/9ccb54da910f482b84ce26a2493b4559/artifacts/model
+status: READY
+status_message: null
+storage_location: mlflow-artifacts:/984135303516450108/9ccb54da910f482b84ce26a2493b4559/artifacts/model
+user_id: null
+version: 2

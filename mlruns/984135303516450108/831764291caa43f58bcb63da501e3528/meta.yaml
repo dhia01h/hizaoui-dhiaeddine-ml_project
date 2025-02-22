@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/984135303516450108/831764291caa43f58bcb63da501e3528/artifacts
+end_time: 1739737963981
+entry_point_name: ''
+experiment_id: '984135303516450108'
+lifecycle_stage: active
+run_id: 831764291caa43f58bcb63da501e3528
+run_name: skittish-goat-17
+run_uuid: 831764291caa43f58bcb63da501e3528
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1739737959423
+status: 3
+tags: []
+user_id: dhia

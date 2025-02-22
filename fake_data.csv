@@ -1,0 +1,5 @@
+State,International plan,Voice mail plan,Total day minutes,Total eve minutes,Total night minutes,Total intl minutes,Churn
+CA,Yes,Yes,300,200,100,20,1
+NY,No,No,200,150,80,15,0
+TX,Yes,Yes,150,100,90,10,1
+FL,No,No,180,120,110,5,0

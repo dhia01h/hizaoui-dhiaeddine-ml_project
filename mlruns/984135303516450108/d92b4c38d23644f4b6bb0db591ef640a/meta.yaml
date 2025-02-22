@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/984135303516450108/d92b4c38d23644f4b6bb0db591ef640a/artifacts
+end_time: 1739356586702
+entry_point_name: ''
+experiment_id: '984135303516450108'
+lifecycle_stage: active
+run_id: d92b4c38d23644f4b6bb0db591ef640a
+run_name: dapper-lynx-23
+run_uuid: d92b4c38d23644f4b6bb0db591ef640a
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1739356586612
+status: 3
+tags: []
+user_id: dhia

@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/984135303516450108/cc87f11578204654acfe736370ea4bba/artifacts
+end_time: 1739824880769
+entry_point_name: ''
+experiment_id: '984135303516450108'
+lifecycle_stage: active
+run_id: cc87f11578204654acfe736370ea4bba
+run_name: bold-sow-956
+run_uuid: cc87f11578204654acfe736370ea4bba
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1739824872230
+status: 3
+tags: []
+user_id: dhia

@@ -1,0 +1,79 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: 🚀 Exécuter les Tests Unitaires
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🛠️ Cloner le dépôt
+        uses: actions/checkout@v3
+
+      - name: 📦 Installer Python et les dépendances
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.9"
+
+      - name: 🚀 Installer les dépendances
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: 🧪 Exécuter les tests unitaires
+        run: pytest tests/
+
+  train-model:
+    name: 🎯 Entraînement du Modèle
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🛠️ Cloner le dépôt
+        uses: actions/checkout@v3
+
+      - name: 📦 Installer les dépendances
+        run: pip install -r requirements.txt
+
+      - name: 🚀 Lancer l’entraînement du modèle
+        run: python src/main.py --train
+
+      - name: 📥 Sauvegarde du modèle
+        uses: actions/upload-artifact@v3
+        with:
+          name: trained-model
+          path: random_forest.pkl
+
+  deploy:
+    name: 🚀 Déploiement du Modèle
+    needs: train-model
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Télécharger le modèle
+        uses: actions/download-artifact@v3
+        with:
+          name: trained-model
+          path: models/
+
+      - name: 📦 Déployer le modèle (Mock)
+        run: echo "🚀 Modèle déployé avec succès !"
+
+      - name: 📧 Notification Email
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.EMAIL_USER }}
+          password: ${{ secrets.EMAIL_PASS }}
+          subject: "🚀 Pipeline CI/CD terminé avec succès !"
+          body: "Le pipeline CI/CD est terminé et le modèle est prêt à être utilisé."
+          to: "ton.email@example.com"
+          from: "GitHub Actions"

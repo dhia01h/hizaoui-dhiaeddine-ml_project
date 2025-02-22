@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/984135303516450108/a3b066e8bec2464b8d37fc5feb11f419/artifacts
+end_time: 1739355873106
+entry_point_name: ''
+experiment_id: '984135303516450108'
+lifecycle_stage: active
+run_id: a3b066e8bec2464b8d37fc5feb11f419
+run_name: spiffy-panda-194
+run_uuid: a3b066e8bec2464b8d37fc5feb11f419
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1739355873081
+status: 3
+tags: []
+user_id: dhia

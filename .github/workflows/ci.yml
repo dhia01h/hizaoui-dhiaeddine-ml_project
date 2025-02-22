@@ -1,0 +1,27 @@
+name: CI/CD Pipeline
+
+on: [push, pull_request]  # Exécution à chaque push ou PR
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🔄 Checkout du code
+        uses: actions/checkout@v3
+
+      - name: ⚙️ Configuration Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.12"
+
+      - name: 📦 Installation des dépendances
+        run: |
+          python -m venv venv
+          source venv/bin/activate
+          pip install -r requirements.txt
+
+      - name: ✅ Lancer les tests
+        run: |
+          source venv/bin/activate
+          PYTHONPATH=src pytest tests/
+

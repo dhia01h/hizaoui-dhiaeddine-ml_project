@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1739824880704
+current_stage: None
+description: ''
+last_updated_timestamp: 1739824880704
+name: ChurnPredictionModel
+run_id: cc87f11578204654acfe736370ea4bba
+run_link: ''
+source: mlflow-artifacts:/984135303516450108/cc87f11578204654acfe736370ea4bba/artifacts/model
+status: READY
+status_message: null
+storage_location: mlflow-artifacts:/984135303516450108/cc87f11578204654acfe736370ea4bba/artifacts/model
+user_id: null
+version: 8

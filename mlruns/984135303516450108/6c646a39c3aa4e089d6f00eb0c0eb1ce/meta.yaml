@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/984135303516450108/6c646a39c3aa4e089d6f00eb0c0eb1ce/artifacts
+end_time: 1739356277702
+entry_point_name: ''
+experiment_id: '984135303516450108'
+lifecycle_stage: active
+run_id: 6c646a39c3aa4e089d6f00eb0c0eb1ce
+run_name: intrigued-zebra-12
+run_uuid: 6c646a39c3aa4e089d6f00eb0c0eb1ce
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1739356277686
+status: 3
+tags: []
+user_id: dhia

@@ -1,0 +1,10 @@
+from mlflow.tracking import MlflowClient
+
+client = MlflowClient()
+MODEL_NAME = "ChurnPredictionModel"  # Assure-toi que c'est le bon nom
+
+versions = client.search_model_versions(f"name='{MODEL_NAME}'")
+
+print("\n📌 Liste des modèles enregistrés :\n")
+for version in versions:
+    print(f"🔹 Version: {version.version}, Stage: {version.current_stage}, Run ID: {version.run_id}")

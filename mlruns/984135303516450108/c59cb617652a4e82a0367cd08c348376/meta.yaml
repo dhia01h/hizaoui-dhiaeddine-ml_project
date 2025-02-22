@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/984135303516450108/c59cb617652a4e82a0367cd08c348376/artifacts
+end_time: 1739829414853
+entry_point_name: ''
+experiment_id: '984135303516450108'
+lifecycle_stage: active
+run_id: c59cb617652a4e82a0367cd08c348376
+run_name: masked-smelt-258
+run_uuid: c59cb617652a4e82a0367cd08c348376
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1739829414757
+status: 3
+tags: []
+user_id: dhia

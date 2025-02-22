@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/984135303516450108/470afe946df8421199fefecb10a112fd/artifacts
+end_time: 1739740925164
+entry_point_name: ''
+experiment_id: '984135303516450108'
+lifecycle_stage: active
+run_id: 470afe946df8421199fefecb10a112fd
+run_name: righteous-flea-186
+run_uuid: 470afe946df8421199fefecb10a112fd
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1739740918858
+status: 3
+tags: []
+user_id: dhia

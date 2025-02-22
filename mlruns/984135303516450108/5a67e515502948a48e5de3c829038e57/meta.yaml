@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/984135303516450108/5a67e515502948a48e5de3c829038e57/artifacts
+end_time: 1739743241543
+entry_point_name: ''
+experiment_id: '984135303516450108'
+lifecycle_stage: active
+run_id: 5a67e515502948a48e5de3c829038e57
+run_name: amusing-robin-781
+run_uuid: 5a67e515502948a48e5de3c829038e57
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1739743236360
+status: 3
+tags: []
+user_id: dhia
