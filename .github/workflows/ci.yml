@@ -1,27 +1,56 @@
 name: CI/CD Pipeline
 
-on: [push, pull_request]  # Exécution à chaque push ou PR
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   test:
     runs-on: ubuntu-latest
+
     steps:
-      - name: 🔄 Checkout du code
-        uses: actions/checkout@v3
+    - name: Checkout du code
+      uses: actions/checkout@v4
 
-      - name: ⚙️ Configuration Python
-        uses: actions/setup-python@v3
-        with:
-          python-version: "3.12"
+    - name: Configurer Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
 
-      - name: 📦 Installation des dépendances
-        run: |
-          python -m venv venv
-          source venv/bin/activate
-          pip install -r requirements.txt
+    - name: Installer les dépendances
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
 
-      - name: ✅ Lancer les tests
-        run: |
-          source venv/bin/activate
-          PYTHONPATH=src pytest tests/
+    - name: Exécuter les tests
+      run: pytest tests/
 
+  notify:
+    needs: test
+    runs-on: ubuntu-latest
+    if: success()
+
+    steps:
+    - name: Envoyer une notification par email
+      uses: dawidd6/action-send-mail@v3
+      with:
+        server_address: smtp.gmail.com
+        server_port: 465
+        username: ${{ secrets.EMAIL_USERNAME }}
+        password: ${{ secrets.EMAIL_PASSWORD }}
+        subject: "✅ CI/CD Pipeline terminé avec succès !"
+        body: |
+          Bonjour Dhia 👋,
+
+          🎉 Le pipeline CI/CD de ton projet **hizaoui-dhiaeddine-ml_project** a été exécuté avec succès.
+
+          📌 Voir les résultats ici : [GitHub Actions](https://github.com/dhia01h/hizaoui-dhiaeddine-ml_project/actions)
+
+          Cordialement,  
+          🚀 CI/CD Bot
+        to: "dhia.hizaoui@esprit.tn"
+        from: "CI/CD Bot <ci-bot@hizaoui-dhiaeddine-ml_project.com>"
