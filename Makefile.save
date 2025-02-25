@@ -96,11 +96,9 @@ lint: check_venv
 
 format: check_venv
 	$(PYTHON) -m black $(MAIN_SCRIPT) model_pipeline.py
+test:
 
-test: check_venv
-	PYTHONPATH=src venv/bin/python3 -m pytest tests/
-
-
+PYTHONPATH=src venv/bin/python3 -m pytest tests/test:
 security: check_venv
 	$(PYTHON) -m bandit -r model_pipeline.py
 

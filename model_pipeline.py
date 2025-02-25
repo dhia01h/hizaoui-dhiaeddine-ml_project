@@ -1,5 +1,10 @@
+"""
+Main script for the Churn Prediction pipeline.
+Handles data loading, training, evaluation, and MLflow logging.
+"""
+
+
 import pandas as pd
-import numpy as np
 import joblib
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler, LabelEncoder
@@ -13,8 +18,16 @@ from sklearn.metrics import (
 )
 
 
-# 🔹 Préparation des données
 def prepare_data(filepath):
+    """
+    Charge et prépare les données à partir du fichier CSV.
+
+    Args:
+        filepath (str): Chemin vers le fichier CSV contenant les données.
+
+    Returns:
+        tuple: (x_train, x_test, y_train, y_test, scaler) après transformation.
+    """
     print(f"📂 Chargement des données depuis {filepath}...")
     df = pd.read_csv(filepath)
 
@@ -27,35 +40,54 @@ def prepare_data(filepath):
         df[col] = LabelEncoder().fit_transform(df[col])
 
     # Séparation des features et de la cible
-    X = df.drop(columns=["Churn"])
-    y = df["Churn"]
+    x_features = df.drop(columns=["Churn"])
+    y_target = df["Churn"]
 
     # Normalisation des données
     scaler = StandardScaler()
-    X_scaled = scaler.fit_transform(X)
+    x_scaled = scaler.fit_transform(x_features)
 
     # Split des données
-    X_train, X_test, y_train, y_test = train_test_split(
-        X_scaled, y, test_size=0.2, random_state=42
+    x_train, x_test, y_train, y_test = train_test_split(
+        x_scaled, y_target, test_size=0.2, random_state=42
     )
 
     print("✅ Données préparées avec succès !")
-    return X_train, X_test, y_train, y_test, scaler
+    return x_train, x_test, y_train, y_test, scaler
 
 
-# 🔹 Entraînement du modèle
-def train_model(X_train, y_train):
+def train_model(x_train, y_train):
+    """
+    Entraîne un modèle Random Forest.
+
+    Args:
+        x_train (array-like): Données d'entraînement.
+        y_train (array-like): Labels d'entraînement.
+
+    Returns:
+        RandomForestClassifier: Modèle entraîné.
+    """
     print("🚀 Entraînement du modèle Random Forest...")
     model = RandomForestClassifier(n_estimators=100, random_state=42)
-    model.fit(X_train, y_train)
+    model.fit(x_train, y_train)
     print("✅ Modèle entraîné avec succès !")
     return model
 
 
-# 🔹 Évaluation du modèle
-def evaluate_model(model, X_test, y_test):
+def evaluate_model(model, x_test, y_test):
+    """
+    Évalue un modèle sur les données de test.
+
+    Args:
+        model (RandomForestClassifier): Modèle à évaluer.
+        x_test (array-like): Données de test.
+        y_test (array-like): Labels de test.
+
+    Returns:
+        dict: Dictionnaire contenant les métriques d'évaluation.
+    """
     print("📊 Évaluation du modèle en cours...")
-    y_pred = model.predict(X_test)
+    y_pred = model.predict(x_test)
 
     metrics = {
         "Accuracy": accuracy_score(y_test, y_pred),
@@ -72,8 +104,14 @@ def evaluate_model(model, X_test, y_test):
     return metrics
 
 
-# 🔹 Sauvegarde du modèle
 def save_model(model, filename="random_forest.pkl"):
+    """
+    Sauvegarde un modèle entraîné sur disque.
+
+    Args:
+        model (RandomForestClassifier): Modèle à sauvegarder.
+        filename (str): Nom du fichier où enregistrer le modèle.
+    """
     if model is None:
         print("❌ Erreur : Aucun modèle à sauvegarder.")
         return
@@ -81,8 +119,16 @@ def save_model(model, filename="random_forest.pkl"):
     print(f"💾 Modèle sauvegardé sous {filename}")
 
 
-# 🔹 Chargement du modèle
 def load_model(filename="random_forest.pkl"):
+    """
+    Charge un modèle sauvegardé depuis le disque.
+
+    Args:
+        filename (str): Nom du fichier contenant le modèle sauvegardé.
+
+    Returns:
+        RandomForestClassifier or None: Le modèle chargé ou None si échec.
+    """
     try:
         print(f"🔄 Chargement du modèle depuis {filename}...")
         model = joblib.load(filename)
@@ -91,6 +137,6 @@ def load_model(filename="random_forest.pkl"):
     except FileNotFoundError:
         print(f"❌ Erreur : Fichier {filename} introuvable.")
         return None
-    except Exception as e:
-        print(f"❌ Erreur lors du chargement du modèle : {e}")
+    except ValueError as error:
+        print(f"❌ Erreur lors du chargement du modèle : {error}")
         return None

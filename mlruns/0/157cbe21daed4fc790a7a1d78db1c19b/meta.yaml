@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/157cbe21daed4fc790a7a1d78db1c19b/artifacts
+end_time: 1740490618508
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 157cbe21daed4fc790a7a1d78db1c19b
+run_name: youthful-cat-761
+run_uuid: 157cbe21daed4fc790a7a1d78db1c19b
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1740490618490
+status: 3
+tags: []
+user_id: dhia

@@ -1,8 +1,15 @@
+"""
+Main script for churn prediction pipeline with MLflow and Elasticsearch.
+"""
+
+import os
 import argparse
 import numpy as np
-import os
+
 import mlflow
 import mlflow.sklearn
+from mlflow.tracking import MlflowClient
+
 from model_pipeline import (
     prepare_data,
     train_model,
@@ -10,11 +17,10 @@ from model_pipeline import (
     save_model,
     load_model,
 )
-from mlflow.tracking import MlflowClient
-from mlflow_utils import (
-    get_elasticsearch_client,
-    log_to_elasticsearch,
-)  # 🔥 Importer Elasticsearch
+from mlflow_utils import get_elasticsearch_client, log_to_elasticsearch
+
+
+
 
 # 📌 Configuration de MLflow
 TRACKING_URI = "http://localhost:5000"  # ✅ Vérifie bien que MLflow tourne sur ce port
@@ -41,25 +47,36 @@ if es is None:
     print("⚠️ Elasticsearch est injoignable, les logs ne seront pas envoyés.")
 
 
-def register_model(run_id, model, X_train):
+def register_model(run_id, model, x_train):
     """
-    Enregistre le modèle dans la Model Registry de MLflow avec un exemple d'entrée.
+    Enregistre un modèle dans la Model Registry de MLflow.
+    
+    Args:
+        run_id (str): ID du run MLflow.
+        model (sklearn.base.BaseEstimator): Modèle entraîné.
+        x_train (numpy.ndarray): Exemple de données d'entrée pour MLflow.
     """
+
     model_uri = f"runs:/{run_id}/model"
-    input_example = np.array([X_train[0]])
+    input_example = np.array([x_train[0]])
 
     try:
         mlflow.sklearn.log_model(model, "model", input_example=input_example)
         registered_model = mlflow.register_model(model_uri, "ChurnPredictionModel")
         print(f"✅ Modèle enregistré dans la Model Registry : {registered_model}")
-    except Exception as e:
-        print(f"❌ Erreur lors de l'enregistrement du modèle : {e}")
-
+    except ValueError as e:
+      print(f"❌ Erreur lors de l'enregistrement du modèle : {e}")
 
 def main():
+    """
+    Exécute le pipeline de churn avec MLflow.
+    """
     parser = argparse.ArgumentParser(description="Pipeline Churn avec MLflow")
     parser.add_argument(
-        "--data", type=str, default="churn-bigml-80.csv", help="Chemin du fichier CSV"
+        "--data",
+        type=str,
+        default="churn-bigml-80.csv",
+        help="Chemin du fichier CSV",
     )
     parser.add_argument("--train", action="store_true", help="Entraîner le modèle")
     parser.add_argument("--evaluate", action="store_true", help="Évaluer le modèle")
@@ -74,7 +91,7 @@ def main():
     args = parser.parse_args()
 
     print("📂 Chargement des données...")
-    X_train, X_test, y_train, y_test, scaler = prepare_data(args.data)
+    x_train, x_test, y_train, y_test, _ = prepare_data(args.data)
     model = None
 
     # 📌 Vérifier si le modèle à charger existe
@@ -97,35 +114,33 @@ def main():
 
         if args.train:
             print("🚀 Entraînement du modèle en cours...")
-            model = train_model(X_train, y_train)
+            model = train_model(x_train, y_train)
+
+
             if model is None:
                 print("❌ Erreur : L'entraînement du modèle a échoué.")
                 return
             print("✅ Modèle entraîné avec succès !")
 
-            register_model(run_id, model, X_train)
+            register_model(run_id, model, x_train)
             if args.save:
                 save_model(model, args.save)
                 print(f"💾 Modèle sauvegardé sous {args.save}")
 
         if args.evaluate:
             if model is None:
-                print(
-                    "⚠️ Aucun modèle trouvé ! Veuillez en entraîner un ou en charger un."
-                )
+                print("⚠️ Aucun modèle trouvé ! Veuillez en entraîner un ou en charger un.")
             else:
                 print("📊 Évaluation du modèle en cours...")
-                metrics = evaluate_model(model, X_test, y_test)
+                metrics = evaluate_model(model, x_test, y_test)
 
                 for metric, value in metrics.items():
                     mlflow.log_metric(metric, value)
-                    print(
-                        f"📤 Envoi de la métrique {metric}: {value} à Elasticsearch..."
-                    )  # 🔍 Debug
+                    print(f"📤 Envoi de la métrique {metric}: {value} à Elasticsearch...")
                     try:
                         log_to_elasticsearch(es, run_id, metric, value)
-                    except Exception as e:
-                        print(f"⚠️ Impossible d'envoyer {metric} à Elasticsearch : {e}")
+                    except ConnectionError as error:
+                        print(f"⚠️ Impossible d'envoyer {metric} à Elasticsearch : {error}")
 
 
 if __name__ == "__main__":
