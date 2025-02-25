@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/984135303516450108/96883618494f416b84f286be86a50491/artifacts
+end_time: 1740353700097
+entry_point_name: ''
+experiment_id: '984135303516450108'
+lifecycle_stage: active
+run_id: 96883618494f416b84f286be86a50491
+run_name: mercurial-quail-570
+run_uuid: 96883618494f416b84f286be86a50491
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1740353699606
+status: 3
+tags: []
+user_id: dhia

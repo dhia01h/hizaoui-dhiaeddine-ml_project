@@ -4,7 +4,14 @@ import joblib
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler, LabelEncoder
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score
+from sklearn.metrics import (
+    accuracy_score,
+    precision_score,
+    recall_score,
+    f1_score,
+    roc_auc_score,
+)
+
 
 # 🔹 Préparation des données
 def prepare_data(filepath):
@@ -28,10 +35,13 @@ def prepare_data(filepath):
     X_scaled = scaler.fit_transform(X)
 
     # Split des données
-    X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.2, random_state=42)
+    X_train, X_test, y_train, y_test = train_test_split(
+        X_scaled, y, test_size=0.2, random_state=42
+    )
 
     print("✅ Données préparées avec succès !")
     return X_train, X_test, y_train, y_test, scaler
+
 
 # 🔹 Entraînement du modèle
 def train_model(X_train, y_train):
@@ -40,6 +50,7 @@ def train_model(X_train, y_train):
     model.fit(X_train, y_train)
     print("✅ Modèle entraîné avec succès !")
     return model
+
 
 # 🔹 Évaluation du modèle
 def evaluate_model(model, X_test, y_test):
@@ -60,6 +71,7 @@ def evaluate_model(model, X_test, y_test):
 
     return metrics
 
+
 # 🔹 Sauvegarde du modèle
 def save_model(model, filename="random_forest.pkl"):
     if model is None:
@@ -67,6 +79,7 @@ def save_model(model, filename="random_forest.pkl"):
         return
     joblib.dump(model, filename)
     print(f"💾 Modèle sauvegardé sous {filename}")
+
 
 # 🔹 Chargement du modèle
 def load_model(filename="random_forest.pkl"):

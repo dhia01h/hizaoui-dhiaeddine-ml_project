@@ -1,8 +1,8 @@
 aliases: []
 creation_timestamp: 1739829378129
-current_stage: Production
+current_stage: Staging
 description: ''
-last_updated_timestamp: 1739830076412
+last_updated_timestamp: 1740486044379
 name: ChurnPredictionModel
 run_id: 453ec845674d475b804d50f45853b46d
 run_link: ''
