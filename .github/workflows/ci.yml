@@ -27,7 +27,7 @@ jobs:
         pip install -r requirements.txt
 
     - name: Exécuter les tests
-      run: pytest tests/
+      run: PYTHONPATH=src pytest tests/
 
   notify:
     needs: test
@@ -50,7 +50,7 @@ jobs:
 
           📌 Voir les résultats ici : [GitHub Actions](https://github.com/dhia01h/hizaoui-dhiaeddine-ml_project/actions)
 
-          Cordialement,  
+          Cordialement,
           🚀 CI/CD Bot
         to: "dhia.hizaoui@esprit.tn"
         from: "CI/CD Bot <ci-bot@hizaoui-dhiaeddine-ml_project.com>"
